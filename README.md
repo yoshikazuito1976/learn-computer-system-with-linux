@@ -53,5 +53,6 @@ CPU、メモリ、ストレージ、OS、プロセス、ファイルシステム
 
 - [00_environment](./00_environment/README.md)
   - [English](./00_environment/README_en.md)
+  - [Chinese](./00_environment/README_ch.md)
   - [Indonesian](./00_environment/README_id.md)
   - [Nepali](./00_environment/README_ne.md)
