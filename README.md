@@ -53,11 +53,11 @@ CPU、メモリ、ストレージ、OS、プロセス、ファイルシステム
 
 - [00_environment](./00_environment/README.md)
   - [English](./00_environment/README_en.md)
-  - [Chinese](./00_environment/README_ch.md)
+  - [Chinese](./00_environment/README_zh.md)
   - [Indonesian](./00_environment/README_id.md)
   - [Nepali](./00_environment/README_ne.md)
 - [01_os_and_distribution](./01_os_and_distribution/README.md)
   - [English](./01_os_and_distribution/README_en.md)
-  - [Chinese](./01_os_and_distribution/README_ch.md)
+  - [Chinese](./01_os_and_distribution/README_zh.md)
   - [Indonesian](./01_os_and_distribution/README_id.md)
   - [Nepali](./01_os_and_distribution/README_ne.md)
