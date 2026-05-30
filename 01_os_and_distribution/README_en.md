@@ -17,6 +17,21 @@ However, when using Linux, you need to distinguish the following terms:
 In this chapter, you will not just memorize these as terms.
 You will run commands in a real Linux environment and understand them by reading the displayed information.
 
+## Chapter flow
+
+```mermaid
+flowchart TD
+	A["1. Check what an OS is"] --> B["2. Check what the Linux kernel is"]
+	B --> C["3. Check what a distribution is"]
+	C --> D["4. Check what a shell is"]
+	D --> E["5. Read /etc/os-release to check OS information"]
+	E --> F["6. Use uname to check kernel information"]
+	F --> G["7. Check the difference between /etc/os-release and uname"]
+	G --> H["8. Think about the differences between AlmaLinux and Ubuntu"]
+	H --> I["9. Run confirmation commands and organize system information"]
+	I --> J["10. Explain the information in your own words"]
+```
+
 ---
 
 ## Learning flow

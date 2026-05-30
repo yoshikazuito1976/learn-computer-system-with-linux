@@ -17,6 +17,21 @@ Namun, saat menggunakan Linux, Anda perlu memahami perbedaan antara istilah beri
 Pada bab ini, Anda tidak hanya menghafal istilah-istilah tersebut.
 Anda akan menjalankan perintah di lingkungan Linux nyata dan memahaminya dengan membaca informasi yang ditampilkan.
 
+## Alur bab ini
+
+```mermaid
+flowchart TD
+	A["1. Memeriksa apa itu OS"] --> B["2. Memeriksa apa itu kernel Linux"]
+	B --> C["3. Memeriksa apa itu distribusi"]
+	C --> D["4. Memeriksa apa itu shell"]
+	D --> E["5. Membaca /etc/os-release untuk memeriksa informasi OS"]
+	E --> F["6. Menggunakan uname untuk memeriksa informasi kernel"]
+	F --> G["7. Memeriksa perbedaan antara /etc/os-release dan uname"]
+	G --> H["8. Memikirkan perbedaan antara AlmaLinux dan Ubuntu"]
+	H --> I["9. Menjalankan perintah pemeriksaan dan merangkum informasi lingkungan"]
+	I --> J["10. Menjelaskan informasi yang telah diperiksa dengan kata-kata sendiri"]
+```
+
 ---
 
 ## Alur pembelajaran
