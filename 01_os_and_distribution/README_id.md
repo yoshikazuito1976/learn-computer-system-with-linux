@@ -26,10 +26,13 @@ Pada bab ini, Anda akan:
 1. Memeriksa apa itu OS
 2. Memeriksa apa itu kernel Linux
 3. Memeriksa apa itu distribusi
-4. Membaca `/etc/os-release` untuk memeriksa informasi OS
-5. Menggunakan `uname` untuk memeriksa informasi kernel
-6. Memikirkan perbedaan antara AlmaLinux dan Ubuntu
-7. Menjelaskan informasi yang telah diperiksa dengan kata-kata sendiri
+4. Memeriksa apa itu shell
+5. Membaca `/etc/os-release` untuk memeriksa informasi OS
+6. Menggunakan `uname` untuk memeriksa informasi kernel
+7. Memeriksa perbedaan antara `/etc/os-release` dan `uname`
+8. Memikirkan perbedaan antara AlmaLinux dan Ubuntu
+9. Menjalankan perintah pemeriksaan dan merangkum informasi lingkungan
+10. Menjelaskan informasi yang telah diperiksa dengan kata-kata sendiri
 
 ---
 
@@ -103,7 +106,123 @@ Karena itu, saat menggunakan Linux, penting untuk memeriksa bukan hanya bahwa it
 
 ---
 
-## 4. Memeriksa informasi OS
+## 4. Apa itu shell
+
+Saat mengoperasikan Linux, kita sering mengetik perintah di terminal.
+
+Pada saat itu, program yang menerima input pengguna, menafsirkannya, lalu meminta OS menjalankan proses disebut **shell**.
+
+Shell adalah antarmuka di antara pengguna dan OS.
+
+```text
+Pengguna
+-> Shell
+-> OS / Kernel
+-> Perangkat keras
+```
+
+Sebagai contoh, misalkan Anda mengetik perintah berikut:
+
+```bash
+ls
+```
+
+Shell menafsirkan input `ls` dan menjalankan program yang sesuai.
+Hasilnya, daftar berkas dan direktori pada lokasi saat ini akan ditampilkan.
+
+---
+
+### Jenis-jenis shell
+
+Di Linux, ada beberapa jenis shell.
+
+Contoh yang umum adalah:
+
+| Shell | Penjelasan |
+| --- | --- |
+| `sh` | Shell Unix dasar |
+| `bash` | Shell yang paling umum dipakai di banyak lingkungan Linux |
+| `zsh` | Shell dengan fitur pelengkapan yang lebih kuat |
+| `fish` | Shell yang berfokus pada kemudahan penggunaan |
+
+Dalam kelas atau materi pembelajaran, `bash` biasanya paling sering digunakan.
+
+Anda bisa memeriksa shell yang sedang dipakai dengan:
+
+```bash
+echo $SHELL
+```
+
+Contoh keluaran:
+
+```text
+/bin/bash
+```
+
+Anda juga bisa memeriksa proses shell yang sedang berjalan dengan:
+
+```bash
+ps
+```
+
+Contoh keluaran:
+
+```text
+	PID TTY          TIME CMD
+ 1234 pts/0    00:00:00 bash
+ 1250 pts/0    00:00:00 ps
+```
+
+Dari contoh ini, kita bisa melihat bahwa shell yang berjalan adalah `bash`.
+
+---
+
+### Shell dan input perintah
+
+Shell tidak hanya menjalankan perintah.
+
+Shell juga memiliki fungsi seperti:
+
+* Menafsirkan perintah
+* Mengelola variabel
+* Menghubungkan perintah dengan pipe `|`
+* Mengalihkan keluaran dengan `>` dan `>>`
+* Menjalankan shell script
+* Menyimpan riwayat perintah
+
+Artinya, sebagian besar operasi baris perintah di Linux dilakukan melalui shell.
+
+---
+
+### Hubungan OS, kernel, dan shell
+
+Hubungan OS, kernel, dan shell dapat diringkas sebagai berikut:
+
+| Istilah | Peran |
+| --- | --- |
+| Kernel | Inti OS yang mengelola bagian dekat perangkat keras |
+| Distribusi | Paket kernel Linux beserta berbagai perangkat lunak |
+| Shell | Program yang menerima perintah pengguna dan meminta OS memprosesnya |
+| Terminal | Layar/aplikasi untuk mengoperasikan shell |
+
+Hal penting yang perlu diingat adalah **terminal dan shell bukan hal yang sama**.
+
+Terminal adalah layar untuk mengetik dan menampilkan teks.
+Shell adalah program penafsir perintah yang berjalan di dalamnya.
+
+```text
+Terminal
+-> Layar untuk mengoperasikan shell
+
+Shell
+-> Program yang menafsirkan dan menjalankan perintah
+```
+
+Dengan memahami perbedaan ini, Anda dapat menjelaskan operasi Linux dengan lebih tepat.
+
+---
+
+## 5. Memeriksa informasi OS
 
 Di lingkungan Linux, informasi OS dan distribusi dapat diperiksa melalui `/etc/os-release`.
 
@@ -136,7 +255,7 @@ Dari sini, Anda dapat mengetahui jenis Linux yang digunakan.
 
 ---
 
-## 5. Memeriksa informasi kernel
+## 6. Memeriksa informasi kernel
 
 Selanjutnya, periksa informasi kernel.
 
@@ -176,7 +295,7 @@ Perintah ini menampilkan arsitektur mesin.
 
 ---
 
-## 6. Perbedaan `/etc/os-release` dan `uname`
+## 7. Perbedaan `/etc/os-release` dan `uname`
 
 `/etc/os-release` dan `uname` sama-sama digunakan untuk memeriksa informasi sistem.
 Namun, jenis informasi yang dilihat berbeda.
@@ -202,7 +321,7 @@ Dengan memahami perbedaan ini, Anda dapat menggunakan istilah "Linux" dengan leb
 
 ---
 
-## 7. Memikirkan perbedaan AlmaLinux dan Ubuntu
+## 8. Memikirkan perbedaan AlmaLinux dan Ubuntu
 
 AlmaLinux dan Ubuntu sama-sama distribusi Linux.
 Namun, ada perbedaan pada keluarga dan konteks penggunaannya.
@@ -225,7 +344,7 @@ Karena itu, saat membaca materi atau artikel web, Anda perlu memperhatikan:
 
 ---
 
-## 8. Coba jalankan
+## 9. Coba jalankan
 
 Jalankan perintah berikut, lalu periksa hasilnya.
 
@@ -241,7 +360,7 @@ Dengan `hostnamectl`, Anda juga bisa memeriksa informasi OS, kernel, dan arsitek
 
 ---
 
-## 9. Catatan observasi
+## 10. Catatan observasi
 
 Berdasarkan hasil perintah, isi tabel berikut.
 

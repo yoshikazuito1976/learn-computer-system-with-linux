@@ -26,10 +26,13 @@ In this chapter, you will:
 1. Check what an OS is
 2. Check what the Linux kernel is
 3. Check what a distribution is
-4. Read `/etc/os-release` to check OS information
-5. Use `uname` to check kernel information
-6. Think about the differences between AlmaLinux and Ubuntu
-7. Explain the information in your own words
+4. Check what a shell is
+5. Read `/etc/os-release` to check OS information
+6. Use `uname` to check kernel information
+7. Check the difference between `/etc/os-release` and `uname`
+8. Think about the differences between AlmaLinux and Ubuntu
+9. Run confirmation commands and organize system information
+10. Explain the information in your own words
 
 ---
 
@@ -103,7 +106,123 @@ So when using Linux, it is important to check not only that it is Linux, but als
 
 ---
 
-## 4. Check OS information
+## 4. What is a shell?
+
+When operating Linux, we often type commands in a terminal.
+
+At that time, the program that receives user input, interprets it, and requests processing from the OS is called a **shell**.
+
+The shell acts as an interface between the user and the OS.
+
+```text
+User
+-> Shell
+-> OS / Kernel
+-> Hardware
+```
+
+For example, suppose you type the following command:
+
+```bash
+ls
+```
+
+The shell interprets the input `ls` and runs the corresponding program.
+As a result, a list of files and directories in the current directory is displayed.
+
+---
+
+### Types of shells
+
+Linux uses several kinds of shells.
+
+Typical examples are:
+
+| Shell | Description |
+| --- | --- |
+| `sh` | Basic Unix-like shell |
+| `bash` | Representative shell used in many Linux environments |
+| `zsh` | Shell with enhanced completion features |
+| `fish` | Shell focused on usability |
+
+In classes and learning materials, `bash` is often used.
+
+You can check your current shell with:
+
+```bash
+echo $SHELL
+```
+
+Example output:
+
+```text
+/bin/bash
+```
+
+You can also check the currently running shell process with:
+
+```bash
+ps
+```
+
+Example output:
+
+```text
+	PID TTY          TIME CMD
+ 1234 pts/0    00:00:00 bash
+ 1250 pts/0    00:00:00 ps
+```
+
+In this example, you can see that `bash` is running as the shell.
+
+---
+
+### Shell and command input
+
+The shell does more than just run commands.
+
+It also provides features such as:
+
+* Interpreting commands
+* Handling variables
+* Connecting commands with pipes `|`
+* Redirecting output with `>` and `>>`
+* Running shell scripts
+* Managing command history
+
+In other words, much of command-line operation in Linux is done through the shell.
+
+---
+
+### Relationship between OS, kernel, and shell
+
+The relationship can be summarized as follows:
+
+| Term | Role |
+| --- | --- |
+| Kernel | Core of the OS that manages hardware-near components |
+| Distribution | Package of Linux kernel and various software |
+| Shell | Program that receives user commands and requests processing from the OS |
+| Terminal | Screen/application used to operate a shell |
+
+An important point is that **terminal and shell are not the same**.
+
+The terminal is the screen for typing and displaying text.
+The shell is the command interpreter running inside it.
+
+```text
+Terminal
+-> A screen for operating the shell
+
+Shell
+-> A program that interprets and executes commands
+```
+
+Understanding this distinction helps you describe Linux operation more accurately.
+
+---
+
+## 5. Check OS information
 
 In Linux, you can check OS and distribution information in `/etc/os-release`.
 
@@ -136,7 +255,7 @@ From this, you can identify the type of Linux you are using.
 
 ---
 
-## 5. Check kernel information
+## 6. Check kernel information
 
 Next, check kernel information.
 
@@ -176,7 +295,7 @@ This shows the machine architecture.
 
 ---
 
-## 6. Difference between `/etc/os-release` and `uname`
+## 7. Difference between `/etc/os-release` and `uname`
 
 Both `/etc/os-release` and `uname` are used to check system information.
 However, the type of information they show is different.
@@ -202,7 +321,7 @@ Understanding this difference helps you use the word "Linux" more accurately.
 
 ---
 
-## 7. Think about the differences between AlmaLinux and Ubuntu
+## 8. Think about the differences between AlmaLinux and Ubuntu
 
 AlmaLinux and Ubuntu are both Linux distributions.
 However, they differ in family and common use cases.
@@ -225,7 +344,7 @@ So when reading tutorials or web articles, you should pay attention to:
 
 ---
 
-## 8. Try running commands
+## 9. Try running commands
 
 Run the following commands and check the results.
 
@@ -241,7 +360,7 @@ With `hostnamectl`, you can also check OS, kernel, and architecture information 
 
 ---
 
-## 9. Observation notes
+## 10. Observation notes
 
 Based on the command outputs, fill in the table below.
 
