@@ -48,3 +48,10 @@ CPU、メモリ、ストレージ、OS、プロセス、ファイルシステム
 - データベース
 
 ネットワークやセキュリティを詳しく扱う内容は、必要に応じて別リポジトリとして分離します。
+
+## Chapters
+
+- [00_environment](./00_environment/README.md)
+  - [English](./00_environment/README_en.md)
+  - [Indonesian](./00_environment/README_id.md)
+  - [Nepali](./00_environment/README_ne.md)
