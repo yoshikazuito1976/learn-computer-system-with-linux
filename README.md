@@ -61,3 +61,8 @@ CPU、メモリ、ストレージ、OS、プロセス、ファイルシステム
   - [Chinese](./01_os_and_distribution/README_zh.md)
   - [Indonesian](./01_os_and_distribution/README_id.md)
   - [Nepali](./01_os_and_distribution/README_ne.md)
+- [02_cpu_and_process](./02_cpu_and_process/README.md)
+  - [English](./02_cpu_and_process/README_en.md)
+  - [Chinese](./02_cpu_and_process/README_zh.md)
+  - [Indonesian](./02_cpu_and_process/README_id.md)
+  - [Nepali](./02_cpu_and_process/README_ne.md)
