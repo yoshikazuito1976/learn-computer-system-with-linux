@@ -88,7 +88,43 @@ lsblk -f
 
 ---
 
-## 4. Apa Itu Filesystem?
+## 4. Apa Itu LVM (Logical Volume Manager)?
+
+LVM adalah mekanisme untuk mengelola disk fisik atau partisi dengan lebih fleksibel.
+
+Pada partisi biasa, mengubah ukuran setelah dibuat sering kali sulit.
+
+Dengan LVM, operasi berikut menjadi lebih mudah:
+
+- Menggabungkan beberapa disk menjadi satu volume
+- Memperbesar atau memperkecil logical volume setelah dibuat
+- Membuat snapshot untuk persiapan pekerjaan pemeliharaan
+
+LVM biasanya dipahami dalam 3 lapisan berikut:
+
+- PV (Physical Volume): disk fisik atau partisi
+- VG (Volume Group): grup yang dibentuk dari beberapa PV
+- LV (Logical Volume): area logis tempat filesystem dibuat
+
+Hubungannya adalah sebagai berikut:
+
+```text
+Disk fisik/partisi (PV) -> Volume group (VG) -> Logical volume (LV)
+```
+
+Perintah yang sering digunakan untuk memeriksa status LVM:
+
+```bash
+sudo pvs
+sudo vgs
+sudo lvs
+```
+
+Jika LVM digunakan, `lsblk` juga dapat menampilkan `lvm` pada kolom `TYPE`.
+
+---
+
+## 5. Apa Itu Filesystem?
 
 Filesystem adalah mekanisme untuk menyimpan dan mengelola file serta direktori di atas storage.
 
@@ -110,7 +146,7 @@ df -T
 
 ---
 
-## 5. Apa Itu Mount?
+## 6. Apa Itu Mount?
 
 Mount berarti menghubungkan storage atau partisi ke dalam struktur direktori Linux.
 
@@ -151,7 +187,7 @@ findmnt
 
 ---
 
-## 6. Memeriksa Kapasitas Disk
+## 7. Memeriksa Kapasitas Disk
 
 Gunakan perintah `df` untuk memeriksa penggunaan disk.
 
@@ -180,7 +216,7 @@ Dari contoh ini, kita dapat membaca hal berikut:
 
 ---
 
-## 7. Memeriksa Penggunaan per Direktori
+## 8. Memeriksa Penggunaan per Direktori
 
 `df` digunakan untuk memeriksa penggunaan seluruh filesystem.
 
@@ -206,7 +242,7 @@ sudo du -sh /var/* 2>/dev/null
 
 ---
 
-## 8. Apa Itu inode?
+## 9. Apa Itu inode?
 
 Dalam filesystem Linux, terdapat informasi pengelolaan untuk file sebenarnya, yang terpisah dari nama file.
 
@@ -236,7 +272,7 @@ Nomor seperti `123456` adalah nomor inode.
 
 ---
 
-## 9. Hubungan Antara Nama File dan inode
+## 10. Hubungan Antara Nama File dan inode
 
 Nama file adalah nama yang mudah digunakan oleh manusia.
 
@@ -262,7 +298,7 @@ Anda dapat memastikan bahwa dua nama file tersebut menunjuk ke nomor inode yang 
 
 ---
 
-## 10. Perbedaan dengan Symbolic Link
+## 11. Perbedaan dengan Symbolic Link
 
 Symbolic link adalah referensi ke file lain.
 
@@ -287,7 +323,7 @@ sample_symlink.txt -> sample.txt
 
 ---
 
-## 11. Apa Itu /etc/fstab?
+## 12. Apa Itu /etc/fstab?
 
 `/etc/fstab` adalah file yang menentukan filesystem mana yang akan di-mount ke lokasi mana saat sistem dinyalakan.
 
@@ -311,7 +347,7 @@ Pada bab ini, cukup periksa isinya. Jangan mengeditnya.
 
 ---
 
-## 12. Praktik: Mengamati Filesystem
+## 13. Praktik: Mengamati Filesystem
 
 Periksa item berikut dan simpan hasilnya ke `04_storage_report.txt`.
 
@@ -357,9 +393,22 @@ sudo du -sh /var 2>/dev/null >> 04_storage_report.txt
 ls -li >> 04_storage_report.txt
 ```
 
+### 8. Periksa informasi LVM
+
+```bash
+{
+	echo "== pvs =="
+	sudo pvs 2>/dev/null || echo "LVM PV tidak ditemukan"
+	echo "== vgs =="
+	sudo vgs 2>/dev/null || echo "LVM VG tidak ditemukan"
+	echo "== lvs =="
+	sudo lvs 2>/dev/null || echo "LVM LV tidak ditemukan"
+} >> 04_storage_report.txt
+```
+
 ---
 
-## 13. Pertanyaan Refleksi
+## 14. Pertanyaan Refleksi
 
 Jawablah pertanyaan berikut dengan kata-kata Anda sendiri.
 
@@ -414,7 +463,7 @@ Petunjuk:
 
 ---
 
-## 14. Ringkasan Bab Ini
+## 15. Ringkasan Bab Ini
 
 Pada bab ini, Anda mempelajari storage dan filesystem di Linux.
 
@@ -422,6 +471,7 @@ Poin pentingnya adalah sebagai berikut:
 
 - Storage adalah perangkat untuk menyimpan data
 - Partisi adalah area storage yang dibagi
+- LVM adalah mekanisme untuk mengelola storage secara fleksibel dengan pengelompokan volume
 - Filesystem adalah mekanisme untuk mengelola file dan direktori
 - Di Linux, semua file ditempatkan dalam struktur pohon yang dimulai dari `/`
 - Mount menghubungkan storage ke struktur direktori

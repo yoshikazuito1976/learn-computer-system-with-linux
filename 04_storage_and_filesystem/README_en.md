@@ -88,7 +88,43 @@ lsblk -f
 
 ---
 
-## 4. What Is a Filesystem?
+## 4. What Is LVM (Logical Volume Manager)?
+
+LVM is a system for managing physical disks and partitions more flexibly.
+
+With regular partitions, resizing can be difficult after creation.
+
+With LVM, the following operations become easier:
+
+- Combine multiple disks into one volume
+- Expand or shrink logical volumes later
+- Create snapshots for maintenance work
+
+LVM is commonly understood in these three layers:
+
+- PV (Physical Volume): physical disk or partition
+- VG (Volume Group): a group created from PVs
+- LV (Logical Volume): logical area where you create a filesystem
+
+The relationship is as follows:
+
+```text
+Physical disk/partition (PV) -> Volume group (VG) -> Logical volume (LV)
+```
+
+Common commands for checking LVM status:
+
+```bash
+sudo pvs
+sudo vgs
+sudo lvs
+```
+
+When LVM is used, `lsblk` may also show `lvm` in the `TYPE` column.
+
+---
+
+## 5. What Is a Filesystem?
 
 A filesystem is a mechanism for saving and managing files and directories on storage.
 
@@ -110,7 +146,7 @@ df -T
 
 ---
 
-## 5. What Is Mounting?
+## 6. What Is Mounting?
 
 Mounting means connecting a storage device or partition into the Linux directory structure.
 
@@ -151,7 +187,7 @@ findmnt
 
 ---
 
-## 6. Checking Disk Capacity
+## 7. Checking Disk Capacity
 
 Use the `df` command to check disk usage.
 
@@ -180,7 +216,7 @@ From this example, we can read the following:
 
 ---
 
-## 7. Checking Directory Usage
+## 8. Checking Directory Usage
 
 `df` checks the usage of the entire filesystem.
 
@@ -206,7 +242,7 @@ sudo du -sh /var/* 2>/dev/null
 
 ---
 
-## 8. What Is an inode?
+## 9. What Is an inode?
 
 In a Linux filesystem, there is management information for the actual file, separate from the file name.
 
@@ -236,7 +272,7 @@ The number such as `123456` is the inode number.
 
 ---
 
-## 9. Relationship Between File Names and inodes
+## 10. Relationship Between File Names and inodes
 
 A file name is a name that is easy for humans to handle.
 
@@ -262,7 +298,7 @@ You can confirm that the two file names point to the same inode number.
 
 ---
 
-## 10. Difference from a Symbolic Link
+## 11. Difference from a Symbolic Link
 
 A symbolic link is a reference to another file.
 
@@ -287,7 +323,7 @@ sample_symlink.txt -> sample.txt
 
 ---
 
-## 11. What Is /etc/fstab?
+## 12. What Is /etc/fstab?
 
 `/etc/fstab` is a file that defines which filesystems are mounted to which locations at startup.
 
@@ -311,7 +347,7 @@ In this chapter, only check the contents. Do not edit it.
 
 ---
 
-## 12. Practice: Observing the Filesystem
+## 13. Practice: Observing the Filesystem
 
 Check the following items and save the results to `04_storage_report.txt`.
 
@@ -357,9 +393,22 @@ sudo du -sh /var 2>/dev/null >> 04_storage_report.txt
 ls -li >> 04_storage_report.txt
 ```
 
+### 8. Check LVM information
+
+```bash
+{
+	echo "== pvs =="
+	sudo pvs 2>/dev/null || echo "No LVM PV was found"
+	echo "== vgs =="
+	sudo vgs 2>/dev/null || echo "No LVM VG was found"
+	echo "== lvs =="
+	sudo lvs 2>/dev/null || echo "No LVM LV was found"
+} >> 04_storage_report.txt
+```
+
 ---
 
-## 13. Reflection Questions
+## 14. Reflection Questions
 
 Answer the following questions in your own words.
 
@@ -414,7 +463,7 @@ Hints:
 
 ---
 
-## 14. Summary of This Chapter
+## 15. Summary of This Chapter
 
 In this chapter, you learned about storage and filesystems in Linux.
 
@@ -422,6 +471,7 @@ Important points are as follows:
 
 - Storage is a device for saving data
 - A partition is a divided area of storage
+- LVM is a mechanism to manage storage flexibly by grouping and separating volumes
 - A filesystem is a mechanism for managing files and directories
 - In Linux, all files are placed in a tree structure starting from `/`
 - Mounting connects storage to the directory structure

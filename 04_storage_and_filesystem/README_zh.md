@@ -88,7 +88,43 @@ lsblk -f
 
 ---
 
-## 4. 什么是文件系统
+## 4. 什么是 LVM（Logical Volume Manager）
+
+LVM 是一种更灵活地管理物理磁盘或分区的机制。
+
+普通分区在创建后，调整大小往往比较困难。
+
+使用 LVM 后，以下操作会更容易：
+
+- 把多个磁盘合并为一个卷
+- 在后续扩容或缩容逻辑卷
+- 创建快照以便维护作业
+
+LVM 通常按以下 3 层来理解：
+
+- PV（Physical Volume）：物理磁盘或分区
+- VG（Volume Group）：由多个 PV 组成的卷组
+- LV（Logical Volume）：实际创建文件系统的逻辑区域
+
+它们的关系如下：
+
+```text
+物理磁盘/分区（PV） -> 卷组（VG） -> 逻辑卷（LV）
+```
+
+常用的 LVM 状态确认命令如下：
+
+```bash
+sudo pvs
+sudo vgs
+sudo lvs
+```
+
+如果系统使用了 LVM，`lsblk` 的 `TYPE` 列中也可能显示 `lvm`。
+
+---
+
+## 5. 什么是文件系统
 
 文件系统是在存储设备上保存和管理文件、目录的机制。
 
@@ -110,7 +146,7 @@ df -T
 
 ---
 
-## 5. 什么是挂载
+## 6. 什么是挂载
 
 挂载是指把存储设备或分区连接到 Linux 的目录结构中。
 
@@ -151,7 +187,7 @@ findmnt
 
 ---
 
-## 6. 确认磁盘容量
+## 7. 确认磁盘容量
 
 确认磁盘使用量时，使用 `df` 命令。
 
@@ -180,7 +216,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 
 ---
 
-## 7. 确认每个目录的使用量
+## 8. 确认每个目录的使用量
 
 `df` 是确认整个文件系统使用量的命令。
 
@@ -206,7 +242,7 @@ sudo du -sh /var/* 2>/dev/null
 
 ---
 
-## 8. 什么是 inode
+## 9. 什么是 inode
 
 在 Linux 文件系统中，除了文件名之外，还有用于管理文件实体的信息。
 
@@ -236,7 +272,7 @@ ls -i
 
 ---
 
-## 9. 文件名与 inode 的关系
+## 10. 文件名与 inode 的关系
 
 文件名是人类容易使用的名称。
 
@@ -262,7 +298,7 @@ ls -li sample.txt sample_link.txt
 
 ---
 
-## 10. 与符号链接的区别
+## 11. 与符号链接的区别
 
 符号链接是指向另一个文件的引用。
 
@@ -287,7 +323,7 @@ sample_symlink.txt -> sample.txt
 
 ---
 
-## 11. 什么是 /etc/fstab
+## 12. 什么是 /etc/fstab
 
 `/etc/fstab` 是定义系统启动时把哪个文件系统挂载到哪个位置的文件。
 
@@ -311,7 +347,7 @@ less /etc/fstab
 
 ---
 
-## 12. 实习：观察文件系统
+## 13. 实习：观察文件系统
 
 确认以下内容，并把结果保存到 `04_storage_report.txt`。
 
@@ -357,9 +393,22 @@ sudo du -sh /var 2>/dev/null >> 04_storage_report.txt
 ls -li >> 04_storage_report.txt
 ```
 
+### 8. 确认 LVM 信息
+
+```bash
+{
+	echo "== pvs =="
+	sudo pvs 2>/dev/null || echo "未发现 LVM 的 PV"
+	echo "== vgs =="
+	sudo vgs 2>/dev/null || echo "未发现 LVM 的 VG"
+	echo "== lvs =="
+	sudo lvs 2>/dev/null || echo "未发现 LVM 的 LV"
+} >> 04_storage_report.txt
+```
+
 ---
 
-## 13. 思考问题
+## 14. 思考问题
 
 请用自己的话回答以下问题。
 
@@ -414,7 +463,7 @@ ls -li >> 04_storage_report.txt
 
 ---
 
-## 14. 本章总结
+## 15. 本章总结
 
 本章学习了 Linux 中的存储和文件系统。
 
@@ -422,6 +471,7 @@ ls -li >> 04_storage_report.txt
 
 - 存储是保存数据的设备
 - 分区是把存储划分出来的区域
+- LVM 是通过卷的组合与拆分来灵活管理存储的机制
 - 文件系统是管理文件和目录的机制
 - 在 Linux 中，所有文件都放在以 `/` 开始的树状结构中
 - 挂载会把存储连接到目录结构中

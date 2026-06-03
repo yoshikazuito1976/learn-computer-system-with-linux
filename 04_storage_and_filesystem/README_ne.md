@@ -88,7 +88,43 @@ lsblk -f
 
 ---
 
-## 4. Filesystem भनेको के हो?
+## 4. LVM (Logical Volume Manager) भनेको के हो?
+
+LVM भनेको physical disk वा partition लाई अझ लचिलो तरिकाले व्यवस्थापन गर्ने प्रणाली हो।
+
+सामान्य partition मा एक पटक बनाएपछि size परिवर्तन गर्न गाह्रो हुन सक्छ।
+
+LVM प्रयोग गर्दा निम्न कामहरू सजिलै गर्न सकिन्छ:
+
+- धेरै disk लाई एउटै volume मा जोड्ने
+- logical volume को size पछि बढाउने वा घटाउने
+- maintenance कामका लागि snapshot बनाउने
+
+LVM लाई प्रायः यी 3 तहमा बुझिन्छ:
+
+- PV (Physical Volume): physical disk वा partition
+- VG (Volume Group): PV हरूलाई समूह बनाएको भाग
+- LV (Logical Volume): filesystem बनाउने logical क्षेत्र
+
+सम्बन्ध यस्तो हुन्छ:
+
+```text
+Physical disk/partition (PV) -> Volume group (VG) -> Logical volume (LV)
+```
+
+LVM को स्थिति जाँच गर्न प्रायः यी command प्रयोग गरिन्छ:
+
+```bash
+sudo pvs
+sudo vgs
+sudo lvs
+```
+
+LVM प्रयोग भएको अवस्थामा `lsblk` को `TYPE` स्तम्भमा `lvm` देखिन सक्छ।
+
+---
+
+## 5. Filesystem भनेको के हो?
 
 Filesystem भनेको storage मा file र directory सुरक्षित तथा व्यवस्थापन गर्ने प्रणाली हो।
 
@@ -110,7 +146,7 @@ df -T
 
 ---
 
-## 5. Mount भनेको के हो?
+## 6. Mount भनेको के हो?
 
 Mount भनेको storage device वा partition लाई Linux को directory structure भित्र जोड्नु हो।
 
@@ -151,7 +187,7 @@ findmnt
 
 ---
 
-## 6. Disk Capacity जाँच गर्ने
+## 7. Disk Capacity जाँच गर्ने
 
 Disk usage जाँच गर्न `df` command प्रयोग गरिन्छ।
 
@@ -180,7 +216,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 
 ---
 
-## 7. Directory अनुसार Usage जाँच गर्ने
+## 8. Directory अनुसार Usage जाँच गर्ने
 
 `df` filesystem को पूरा usage जाँच गर्ने command हो।
 
@@ -206,7 +242,7 @@ sudo du -sh /var/* 2>/dev/null
 
 ---
 
-## 8. inode भनेको के हो?
+## 9. inode भनेको के हो?
 
 Linux filesystem मा file name भन्दा अलग, वास्तविक file व्यवस्थापन गर्ने जानकारी हुन्छ।
 
@@ -236,7 +272,7 @@ ls -i
 
 ---
 
-## 9. File Name र inode को सम्बन्ध
+## 10. File Name र inode को सम्बन्ध
 
 File name मानिसले सजिलै प्रयोग गर्न सक्ने नाम हो।
 
@@ -262,7 +298,7 @@ ls -li sample.txt sample_link.txt
 
 ---
 
-## 10. Symbolic Link सँगको फरक
+## 11. Symbolic Link सँगको फरक
 
 Symbolic link अर्को file तर्फको reference हो।
 
@@ -287,7 +323,7 @@ sample_symlink.txt -> sample.txt
 
 ---
 
-## 11. /etc/fstab भनेको के हो?
+## 12. /etc/fstab भनेको के हो?
 
 `/etc/fstab` startup को समयमा कुन filesystem कहाँ mount गर्ने भनेर निर्धारण गर्ने file हो।
 
@@ -311,7 +347,7 @@ less /etc/fstab
 
 ---
 
-## 12. अभ्यास: Filesystem अवलोकन गर्ने
+## 13. अभ्यास: Filesystem अवलोकन गर्ने
 
 निम्न कुराहरू जाँच गरी परिणाम `04_storage_report.txt` मा सुरक्षित गरौँ।
 
@@ -357,9 +393,22 @@ sudo du -sh /var 2>/dev/null >> 04_storage_report.txt
 ls -li >> 04_storage_report.txt
 ```
 
+### 8. LVM जानकारी जाँच गर्ने
+
+```bash
+{
+	echo "== pvs =="
+	sudo pvs 2>/dev/null || echo "LVM को PV भेटिएन"
+	echo "== vgs =="
+	sudo vgs 2>/dev/null || echo "LVM को VG भेटिएन"
+	echo "== lvs =="
+	sudo lvs 2>/dev/null || echo "LVM को LV भेटिएन"
+} >> 04_storage_report.txt
+```
+
 ---
 
-## 13. विचार प्रश्नहरू
+## 14. विचार प्रश्नहरू
 
 निम्न प्रश्नहरूको उत्तर आफ्नै शब्दमा लेख्नुहोस्।
 
@@ -414,7 +463,7 @@ Hint:
 
 ---
 
-## 14. यस अध्यायको सारांश
+## 15. यस अध्यायको सारांश
 
 यस अध्यायमा तपाईंले Linux मा storage र filesystem बारे सिक्नुभयो।
 
@@ -422,6 +471,7 @@ Hint:
 
 - Storage data सुरक्षित गर्ने device हो
 - Partition storage लाई विभाजन गरिएको क्षेत्र हो
+- LVM storage लाई समूहमा बाँधेर लचिलो रूपमा व्यवस्थापन गर्ने प्रणाली हो
 - Filesystem file र directory व्यवस्थापन गर्ने प्रणाली हो
 - Linux मा सबै file `/` बाट सुरु हुने tree structure भित्र राखिन्छन्
 - Mount ले storage लाई directory structure मा जोड्छ
