@@ -54,6 +54,84 @@ Saat Anda menambahkan opsi `-h`, ditampilkan dalam satuan yang mudah dibaca manu
 
 ---
 
+## Representasi Data di Memori
+
+Memori tidak hanya menyimpan program yang berjalan, tetapi juga data yang sedang diproses.
+
+Data bisa berupa teks, bilangan bulat, bilangan desimal, gambar, suara, dan lain-lain.
+
+Namun, di dalam komputer, semuanya direpresentasikan sebagai kombinasi 0 dan 1.
+
+Sebagai contoh, bilangan bulat dan bilangan desimal direpresentasikan dengan cara yang berbeda di memori.
+
+Nilai seperti berikut dapat direpresentasikan sebagai bilangan bulat.
+
+```text
+100
+42
+-7
+```
+
+Sementara itu,
+
+```text
+3.14
+0.1
+6.02 x 10^23
+```
+
+nilai seperti ini direpresentasikan sebagai bilangan floating-point.
+
+Floating-point dapat dianggap sebagai notasi ilmiah versi biner.
+
+Dalam notasi desimal, bilangan yang sangat besar bisa ditulis seperti ini:
+
+```text
+6.02 x 10^23
+```
+
+Di dalam komputer, idenya dinyatakan dalam biner:
+
+```text
+1.xxxxx x 2^n
+```
+
+Dengan cara ini, angka dibagi menjadi tiga bagian.
+
+| Bagian | Makna |
+| --- | --- |
+| Tanda | Apakah bilangan positif atau negatif |
+| Eksponen | Seberapa jauh titik desimal digeser |
+| Mantisa | Bagian utama dari angka |
+
+Contohnya, bilangan besar seperti `6.02 x 10^23` dapat dipandang secara perkiraan sebagai:
+
+```text
+6.02 x 10^23 ~= 1.xxxxx_2 x 2^78
+```
+
+Namun, jumlah bit yang tersedia di memori terbatas.
+
+Karena itu, floating-point tidak selalu dapat menyimpan nilai secara persis.
+Sering kali nilainya disimpan sebagai pendekatan terdekat.
+
+Mari cek dengan Python.
+
+```python
+x = 6.02e23
+
+print(x)
+print(type(x))
+```
+
+`6.02e23` adalah cara penulisan Python untuk `6.02 x 10^23`.
+
+Pada bab ini, Anda tidak perlu menghafal detail perhitungan floating-point.
+
+Poin pentingnya adalah: data di memori direpresentasikan dengan 0 dan 1, dan bilangan bulat serta desimal memiliki representasi yang berbeda.
+
+---
+
 ## Cara Membaca Perintah free
 
 Saat Anda menjalankan `free -h`, item seperti berikut ditampilkan:
@@ -67,7 +145,7 @@ Swap:         2.0Gi          0B       2.0Gi
 Poin-poin yang perlu diperhatikan adalah sebagai berikut:
 
 | Item | Makna |
-|---|---|
+| --- | --- |
 | total | Jumlah total memori |
 | used | Jumlah memori yang sedang digunakan |
 | free | Jumlah memori yang segera tersedia |

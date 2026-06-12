@@ -54,6 +54,84 @@ When you add the `-h` option, it is displayed in human-readable units.
 
 ---
 
+## Data Representation in Memory
+
+Memory stores not only running programs but also data being processed.
+
+Data can be text, integers, decimal numbers, images, sounds, and more.
+
+However, inside a computer, all of these are represented as combinations of 0 and 1.
+
+For example, integers and decimal numbers are represented differently in memory.
+
+Values like the following can be represented as integers.
+
+```text
+100
+42
+-7
+```
+
+On the other hand,
+
+```text
+3.14
+0.1
+6.02 x 10^23
+```
+
+values like these are represented as floating-point numbers.
+
+Floating-point numbers can be seen as a binary version of scientific notation.
+
+In decimal notation, a very large number can be written as:
+
+```text
+6.02 x 10^23
+```
+
+Inside the computer, the same idea is handled in binary:
+
+```text
+1.xxxxx x 2^n
+```
+
+In this style, a number is split into three parts.
+
+| Part | Meaning |
+| --- | --- |
+| Sign | Whether the number is positive or negative |
+| Exponent | How far the decimal point is shifted |
+| Mantissa | The main significant digits |
+
+For example, a large number like `6.02 x 10^23` can be thought of approximately as:
+
+```text
+6.02 x 10^23 ~= 1.xxxxx_2 x 2^78
+```
+
+But the number of bits in memory is limited.
+
+So floating-point numbers cannot always represent values exactly.
+They are often stored as nearby approximations.
+
+Let's check this in Python.
+
+```python
+x = 6.02e23
+
+print(x)
+print(type(x))
+```
+
+`6.02e23` is Python notation for `6.02 x 10^23`.
+
+In this chapter, you do not need to memorize all floating-point calculation details.
+
+The key point is that memory data is represented in 0 and 1, and integers and decimal numbers are represented differently.
+
+---
+
 ## How to Read the free Command
 
 When you run `free -h`, items like the following are displayed:
@@ -67,7 +145,7 @@ Swap:         2.0Gi          0B       2.0Gi
 The points to watch are as follows:
 
 | Item | Meaning |
-|---|---|
+| --- | --- |
 | total | Total amount of memory |
 | used | Amount of memory in use |
 | free | Amount of memory immediately available |
